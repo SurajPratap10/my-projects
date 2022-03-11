@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="main_div">
+        <h1>MusiCard</h1>
+        <div class="music_container">
+            <h2 id = "title">KABHI KABHI ADITI</h2>
+            <h3 id ="artist">Rashid Ali</h3>
+            <div class="img_container">
+            
+
+            <img src="pics/sam-1.jpg" alt="" />
+            <!-- <video width="240px" height="200px" controls>
+                <source src="video/sam-1.mp4" type="video/mp4">
+            </video>
+                -->
+            </div>
+            <audio src="songs/sam-1.mp3"></audio>
+            
+
+
+            <div class="progressbar_container" id = "progressbar">
+                <div class="progress_duration_meter">
+                    <div id="current_time">0:00</div>
+                    <div id="duration">3:41</div>
+                </div>
+                <div class="progress_div" id = "progress_div">
+                    <div class="progress" id = "progress"></div>
+                </div>
+            </div>
+           
+            
+               
+
+
+            <!-- controls -->
+            <div class="music_controls">
+                <i class="fas fa-backward" id = "prev" title = "Previous"></i>
+                <i class="fas fa-play main_button" id = "play" title = "Play"></i>
+                <i class="fas fa-forward" id = "next" title = "Next"></i>
+
+            </div>
+        </div>
+    </div>
+    
+    <script  type="text/javascript" src="vanilla-tilt.js"></script>>
+        <script type="text/javascript">
+	     VanillaTilt.init(document.querySelector(".music_container"), {
+		 max: 15,
+		 speed: 400,
+         glare: false,
+         "max-glare": 1,
+	    });
+        
+        const music = document.querySelector("audio");
+        // const video = document.querySelector("video");
+        const play = document.getElementById("play");
+        const artist = document.getElementById("artist");
+        const title = document.getElementById("title");
+        const prev = document.getElementById("prev");
+        const next = document.getElementById("next");
+        
+        let progress = document.getElementById("progress");
+        let total_duration = document.getElementById("duration");
+        let current_time = document.getElementById("current_time");
+        const progress_div = document.getElementById("progress_div")
+        const songs = [
+            {
+            name:"sam-1",
+            title:"Kabhi Kabhi Aditi",
+            artist:"Rashid Ali",
+
+        },
+        {
+            name:"sam-2",
+            title:"Toota Jo Kabhi Tara",
+            artist:"Atif Aslam",
+        },
+        {
+            name:"sam-3",
+            title:"Tum Se Hi",
+            artist:"Mohit Chauhan",
+
+        },
+        {
+            name:"sam-4",
+            title:"Dil Ko Karaar",
+            artist:"Yasser Desai , Neha Kakkar",
+
+        },
+        {
+            name:"sam-5",
+            title:"Dil Ibaadat",
+            artist:"K.K",
+
+        },
+        {
+            name:"sam-6",
+            title:"I Hate Luv Storys",
+            artist:"Vishal Dadlani",
+            
+        },
+        {
+            name:"sam-7",
+            title:"Harleys In Hawaii",
+            artist:"Katty Perry",
+
+        },
+        {
+            name:"sam-8",
+            title:"Despacito",
+            artist:"Luis Fonsi, Daddy Yankee",
+
+        },
+        {
+            name:"sam-9",
+            title:"Brown Munde",
+            artist:"AP Dhillon, Gurinder Gill, Shinda Kahlon",
+        
+        },
+        {    name:"sam-10",
+            title:"Senorita",
+            artist:"Shawn Mendes, Camila Cabello,",
+
+        },
+        {    name:"sam-11",
+            title:"Tu Hai Ki Nahi",
+            artist:"Ankit Tiwari",
+
+        },
+        {    name:"sam-12",
+            title:"Aaja Na Ferrari Mein",
+            artist:"Armaan Malik",
+
+        },
+        {
+            name:"sam-13",
+            title:"First Kiss",
+            artist:"Yo Yo Honey Singh, Ipsitaa",
+
+        },
+        {
+            name:"sam-14",
+            title:"I ll Be Waiting",
+            artist:"Arjun, Arijit Singh",
+
+        },
+        {
+            name:"sam-15",
+            title:"Kina Chir",
+            artist:"The PropheC",
+
+        },
+        {
+            name:"sam-16",
+            title:"Satisfya",
+            artist:"Imraan Khan",
+
+        },
+        {
+            name:"sam-17",
+            title:"Gulabi Aankhen",
+            artist:"SANAM",
+
+        },
+        {
+            name:"sam-18",
+            title:"Mere Nishaan",
+            artist:"Darshan Raval",
+
+        },
+        {
+            name:"sam-19",
+            title:"Pehli Mohabbat",
+            artist:"Darshan Raval",
+
+        },
+        {
+            name:"sam-20",
+            title:"Nashe Si Chadh Gayi",
+            artist:"Arijit Singh",
+
+        },
+        {
+            name:"sam-21",
+            title:"Kun Faya Kun",
+            artist:"A.R. Rahman, Javed Ali, Mohit Chauhan",
+
+        },
+        {
+            name:"sam-22",
+            title:"O Mere Dil Ke Chain",
+            artist:"SANAM",
+
+        },
+        {
+            name:"sam-23",
+            title:"Ishq Bulaava",
+            artist:"SANAM",
+
+        },
+        {
+            name:"sam-24",
+            title:"High Heels",
+            artist:"Yo Yo Honey Singh, Jaz Dhami",
+
+        },
+        {
+            name:"sam-25",
+            title:"Brown Rang",
+            artist:"Yo Yo Honey Singh",
+
+        },
+        {
+            name:"sam-26",
+            title:"Itni Door",
+            artist:"SANAM",
+
+        },
+        {
+            name:"sam-27",
+            title:"Tum Mile",
+            artist:"Neeraj Shridhar",
+
+        },
+        {
+            name:"sam-28",
+            title:"Dil Kya Kare",
+            artist:"SANAM",
+
+        },
+        {
+            name:"sam-29",
+            title:"Main Hoon",
+            artist:"SANAM",
+
+        },
+        {
+            name:"sam-30",
+            title:"Jashn E Bahaara",
+            artist:"Javed Ali",
+
+        },
+        {
+            name:"sam-31",
+            title:"Tu Hi Haqeeqat",
+            artist:"Javed Ali",
+
+        },
+        {
+            name:"sam-32",
+            title:"Insane X Starboy",
+            artist:"AP Dhillon X Weeknd",
+
+        },
+        {
+            name:"sam-33",
+            title:"Pasoori",
+            artist:"Shae Gill, Ali Sethi",
+
+        }];
+
+        let isPlaying = false;
+
+        //PLAY
+        const playMusic =  () => {
+            isPlaying = true;
+            music.play();
+            // video.play();
+
+            play.classList.replace("fa-play", "fa-pause");
+        };
+        //Pause
+        const pauseMusic =  () => {
+            isPlaying = false;
+            music.pause();
+            // video.pause();
+
+            play.classList.replace("fa-pause", "fa-play");
+        };
+
+        play.addEventListener("click",() => {
+            isPlaying ? pauseMusic() : playMusic();
+        });
+
+
+        const loadSong = (songs) =>{
+            title.textContent = songs.title;
+            artist.textContent = songs.artist;
+            music.src = "songs/" + songs.name+".mp3";
+            // video.src =  "video/" + songs.name+".mp4";
+        };
+
+        
+        
+        songIndex = 0;
+
+        const nextSong = () => {
+            songIndex = (songIndex + 1) % songs.length;
+            loadSong(songs[songIndex]);
+            playMusic();
+        };
+        const prevSong = () => {
+            songIndex = (songIndex - 1 + songs.length) % songs.length;
+            loadSong(songs[songIndex]);
+            playMusic();
+            
+        };
+
+
+        // Progressbar
+        music.addEventListener("timeupdate",(event) =>{
+            const{ currentTime , duration} = event.srcElement;
+         
+            let progress_time = (currentTime / duration)*100;
+            progress.style.width = `${progress_time}%`;
+
+            let min_duration = Math.floor(duration/60);
+            let sec_duration = Math.floor(duration%60);
+            
+
+            let tot_duration = `${min_duration}:${sec_duration}`;
+            if (duration){
+            total_duration.textContent = `${tot_duration}`;
+
+            }
+          
+
+            let min_currentTime = Math.floor(currentTime/60);
+            let sec_currentTime = Math.floor(currentTime%60);
+            
+
+            
+            if(sec_currentTime < 10){
+                sec_currentTime = `0${sec_currentTime}`;
+            }
+            let tot_currentTime = `${min_currentTime}:${sec_currentTime}`;
+            current_time.textContent = `${tot_currentTime}`;
+
+        });
+
+        progress_div.addEventListener("click", (event) =>{
+            console.log(event);
+            const{duration} = music;
+            let move_progress = (event.offsetX/event.srcElement.clientWidth)*duration;
+
+            music.currentTime = move_progress;
+
+        });
+        music.addEventListener("ended" , nextSong);
+
+
+
+        next.addEventListener("click",nextSong);
+        prev.addEventListener("click",prevSong);
+        
+        
+    </script>
+    
+</body>
+</html>
